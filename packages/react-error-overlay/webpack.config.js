@@ -38,10 +38,10 @@ module.exports = {
   optimization: {
     nodeEnv: false,
   },
-  node: {
-    fs: 'empty',
-    process: false,
-  },
+  // node: {
+  //   fs: 'empty',
+  //   process: false,
+  // },
   performance: {
     hints: false,
   },

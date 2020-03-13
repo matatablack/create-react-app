@@ -179,7 +179,7 @@ module.exports = function(webpackEnv) {
         ? 'static/js/[name].[contenthash:8].js'
         : isEnvDevelopment && 'static/js/bundle.js',
       // TODO: remove this when upgrading to webpack 5
-      futureEmitAssets: true,
+      // futureEmitAssets: true,
       // There are also additional JS chunk files if you use code splitting.
       chunkFilename: isEnvProduction
         ? 'static/js/[name].[contenthash:8].chunk.js'
@@ -653,7 +653,10 @@ module.exports = function(webpackEnv) {
       // solution that requires the user to opt into importing specific locales.
       // https://github.com/jmblog/how-to-optimize-momentjs-with-webpack
       // You can remove this if you don't use Moment.js:
-      new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+      new webpack.IgnorePlugin({
+        resourceRegExp: /^\.\/locale$/,
+        contextRegExp: /moment$/,
+      }),
       // Generate a service worker script that will precache, and keep up to date,
       // the HTML & assets that are part of the webpack build.
       isEnvProduction &&
@@ -702,16 +705,16 @@ module.exports = function(webpackEnv) {
     ].filter(Boolean),
     // Some libraries import Node modules but don't use them in the browser.
     // Tell webpack to provide empty mocks for them so importing them works.
-    node: {
-      module: 'empty',
-      dgram: 'empty',
-      dns: 'mock',
-      fs: 'empty',
-      http2: 'empty',
-      net: 'empty',
-      tls: 'empty',
-      child_process: 'empty',
-    },
+    // node: {
+    //   module: 'empty',
+    //   dgram: 'empty',
+    //   dns: 'mock',
+    //   fs: 'empty',
+    //   http2: 'empty',
+    //   net: 'empty',
+    //   tls: 'empty',
+    //   child_process: 'empty',
+    // },
     // Turn off performance processing because we utilize
     // our own hints via the FileSizeReporter
     performance: false,
